@@ -39,6 +39,19 @@ function codeClass (status) {
   return Number(String(status).charAt(0) + '00')
 }
 
+function getResponse () {
+  if (!this.res) {
+    var newResponse = new Response(this.res.body, {
+      status: this.status,
+      headers: this.res.headers
+    })
+    return newResponse
+  }
+  return new Response(this.message, {
+    status: this.status
+  })
+}
+
 /**
  * Create a new HTTP Error.
  *
@@ -49,7 +62,7 @@ function codeClass (status) {
 function createError () {
   // so much arity going on ~_~
   var err
-  var msg
+  var message
   var status = 500
   var props = {}
   for (var i = 0; i < arguments.length; i++) {
@@ -61,7 +74,7 @@ function createError () {
     } else if (type === 'number' && i === 0) {
       status = arg
     } else if (type === 'string') {
-      msg = arg
+      message = arg
     } else if (type === 'object') {
       props = arg
     } else {
@@ -84,8 +97,8 @@ function createError () {
   if (!err) {
     // create error
     err = HttpError
-      ? new HttpError(msg)
-      : new Error(msg || statuses.message[status])
+      ? new HttpError(message)
+      : new Error(message || statuses.message[status])
     Error.captureStackTrace(err, createError)
   }
 
@@ -100,6 +113,8 @@ function createError () {
       err[key] = props[key]
     }
   }
+
+  err.getResponse = getResponse.bind(err)
 
   return err
 }

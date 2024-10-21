@@ -1,5 +1,5 @@
 {
-  "name": "http-errors",
+  "name": "hono-http-errors",
   "description": "Create HTTP error objects",
   "version": "2.0.0",
   "author": "Jonathan Ong <me@jongleberry.com> (http://jongleberry.com)",
@@ -39,10 +39,12 @@
   },
   "keywords": [
     "http",
-    "error"
+    "error",
+    "hono"
   ],
   "files": [
     "index.js",
+    "index.d.ts",
     "HISTORY.md",
     "LICENSE",
     "README.md"

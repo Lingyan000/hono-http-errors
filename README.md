@@ -6,6 +6,8 @@
 [![Build Status][ci-image]][ci-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
+Modified to be a more suitable HTTP error library for Hono.
+
 Create HTTP errors for Express, Koa, Connect, etc. with ease.
 
 ## Install
